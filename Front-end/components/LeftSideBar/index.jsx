@@ -11,12 +11,12 @@ const onlineFriends = [
   { nome: "Ilem", src: "https://github.com/ilemsantos.png" },
 ];
 
-export default function LeftSideBar() {
+export default function LeftSideBar({ user }) {
   return (
     <VStack p={6} w="full">
       <Profile
-        name="Ilem Santos"
-        srcProfile="https://github.com/ilemsantos.png"
+        name={user?.name}
+        srcProfile={user?.image}
       />
 
       <Box w="full" px={8} py={4}>
