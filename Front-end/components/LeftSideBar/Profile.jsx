@@ -1,16 +1,22 @@
-import Link from "next/link";
-import { Avatar, AvatarBadge, Heading, HStack, IconButton, VStack } from "@chakra-ui/react";
+import { Avatar, AvatarBadge, Heading, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, VStack } from "@chakra-ui/react"
 import { RiInstagramFill, RiTwitterFill, RiGithubFill } from "react-icons/ri"
+import Link from "next/link"
 
 export default function Profile({ name, srcProfile }) {
   return (
     <VStack>
-      <Link href="/update">
-        <Avatar name={name} src={srcProfile} size="lg">
-          <AvatarBadge boxSize={5} bg="green.500" />
-        </Avatar>
-      </Link>
+      <Menu>
+        <MenuButton>
+          <Avatar name={name} src={srcProfile} size="lg">
+            <AvatarBadge boxSize={5} bg="green.500" />
+          </Avatar>
+        </MenuButton>
+        <MenuList>
+          <MenuItem><Link href="/accounts/edit">Edit profile</Link></MenuItem>
+        </MenuList>
+      </Menu>
       <Heading fontSize="xl">{name}</Heading>
+
       <HStack>
         <IconButton
           color="gray.500"

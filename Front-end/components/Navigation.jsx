@@ -1,13 +1,30 @@
 import { VStack, Image, IconButton, Tooltip } from "@chakra-ui/react";
-import { MdDashboard, MdMail, MdSettings } from "react-icons/md";
+import { MdDashboard, MdLogout, MdMail, MdMoreHoriz, MdSettings } from "react-icons/md";
 import { HiLightningBolt, HiBell, HiTag, HiSearch } from "react-icons/hi";
+import { setCookie } from 'nookies'
+import { useRouter } from "next/router"
+import Link from "next/link";
 
 export default function Navigation() {
+  const router = useRouter();
+
+  function logout() {
+    setCookie(undefined, 'nextauth.access_token', "access_token", {
+      maxAge: 1,
+      path: '/',
+    })
+
+    router.push('/auth/signin')
+  }
+
   return (
-    <VStack justifyContent="space-between" px={2} py={6}>
+    <VStack justifyContent="space-between" px={3} py={6}>
       <VStack>
-        <Image src="dccord-logo.png" alt="dccord logo" boxSize="50px" mt={5} mb={10}
-        />
+        <Link href="/">
+          <a>
+            <Image src="/dccord.png" alt="Logo DCCord " boxSize="50px" mt={5} mb={10} />
+          </a>
+        </Link>
         {/* IconButtons with Tooltips */}
         <Tooltip label="Dashboard" placement="right">
           <IconButton
@@ -48,8 +65,18 @@ export default function Navigation() {
           />
         </Tooltip>
       </VStack>
-      <Tooltip label="Settigns" placement="right">
-        <IconButton icon={<MdSettings />} aria-label="Settigns" />
+
+      <VStack>
+        <Tooltip label="Settigns" placement="right">
+          <IconButton icon={<MdSettings />} aria-label="Settigns" />
+        </Tooltip>
+        <Tooltip label="More" placement="right">
+          <IconButton icon={<MdMoreHoriz />} aria-label="More" />
+        </Tooltip>
+      </VStack>
+
+      <Tooltip label="Logout" placement="right">
+        <IconButton icon={<MdLogout />} aria-label="Logout" onClick={logout} />
       </Tooltip>
     </VStack>
   );

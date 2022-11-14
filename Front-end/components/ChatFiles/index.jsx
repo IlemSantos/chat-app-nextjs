@@ -5,12 +5,12 @@ import SharedFiles from "./SharedFiles";
 import SharedLinks from "./SharedLinks";
 
 const sharedFiles = [
-  { src: "/dccord-logo.png", name: "Photo Danver.jpg", date: "10/03/2021", hour: "11:43", size: "175" },
-  { src: "/dccord-logo.png", name: "Photo Danver 01.jpg", date: "11/03/2021", hour: "12:43", size: "176" }
+  { src: "/dccord.png", name: "Photo Danver.jpg", date: "10/03/2021", hour: "11:43", size: "175" },
+  { src: "/dccord.png", name: "Photo Danver 01.jpg", date: "11/03/2021", hour: "12:43", size: "176" }
 ];
 
 const sharedLinks = [
-  { src: "/dccord-logo.png", link: "Dribbble.com", date: "10/12/2020", hour: "10:32pm" }
+  { src: "/dccord.png", link: "Dribbble.com", date: "10/12/2020", hour: "10:32pm" }
 ];
 
 export default function ChatFiles() {
