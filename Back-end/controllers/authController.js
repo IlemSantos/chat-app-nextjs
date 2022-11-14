@@ -19,9 +19,7 @@ export async function auth_signUp(req, res) {
 
         user.password = undefined;
 
-        const access_token = jwt_generated({ id: user._id });
-
-        return res.status(201).send({ user, access_token });
+        return res.status(201).send({ user, access_token: jwt_generated({ id: user.id }) });
     } catch (err) {
         return res.status(400).send({ error: 'Registration failed' })
     }
@@ -40,9 +38,7 @@ export async function auth_signInWithPassword(req, res) {
             if (isMatch) {
                 user.password = undefined;
 
-                const access_token = jwt_generated({ id: user._id });
-
-                res.send({ user, access_token });
+                res.send({ user, access_token: jwt_generated({ id: user.id }) });
             } else {
                 res.status(400).send({ error: 'Invalid password' });
             }
@@ -57,7 +53,7 @@ export async function get_user(req, res) {
     try {
         const uid = req.userId;
 
-        const user = await User.findOne({ uid });
+        const user = await User.findOne({ _id: uid });
 
         if (!user)
             return res.status(400).send({ error: 'User not found' });
@@ -70,12 +66,12 @@ export async function get_user(req, res) {
 
 export async function auth_update(req, res) {
     try {
-        const { password, image } = req.body;
-        const id = req.userId;
+        const { name, image } = req.body;
+        const uid = req.userId;
 
-        const user = await User.findOne({ id }).select('+password');
+        const user = await User.findOne({ _id: uid }).select('+password');
 
-        user.password = password ? password : user.password;
+        user.name = name ? name : user.name;
         user.image = image ? image : user.image;
 
         await user.save();
