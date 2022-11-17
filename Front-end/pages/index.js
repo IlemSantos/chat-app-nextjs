@@ -20,7 +20,7 @@ export default function Home() {
         </Flex>
 
         <Flex as="main" height="full" flex={1} borderRightColor="gray.100" borderRightWidth={1}>
-          <Chat />
+          <Chat username={user?.name} image={user?.image} />
         </Flex>
 
         <Flex as="aside" width="full" maxW="sm" height="full">
